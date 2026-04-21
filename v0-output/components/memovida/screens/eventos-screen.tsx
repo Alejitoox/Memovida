@@ -46,14 +46,18 @@ const planesSugeridos: SugerenciaPlan[] = [
 export function EventosScreen() {
   const { goBack } = useMemoVida()
   const [paso, setPaso] = useState<Paso>('inicio')
+  const [microfonoActivado, setMicrofonoActivado] = useState(false)
 
-  const avanzarAGustos = () => setPaso('gustos')
+  const avanzarAGustos = () => {
+    setPaso('gustos')
+    setMicrofonoActivado(false)
+  }
+
   const verPersonas = () => setPaso('personas')
   const verPlanes = () => setPaso('planes')
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Header */}
       <header className="bg-violet-600 text-white px-6 py-4 flex items-center gap-3 flex-shrink-0">
         <button
           onClick={goBack}
@@ -78,7 +82,6 @@ export function EventosScreen() {
       </header>
 
       <main className="flex-1 overflow-y-auto px-5 py-5 flex flex-col gap-5">
-        {/* Paso 1: Inicio / explicación */}
         {paso === 'inicio' && (
           <div className="flex flex-col gap-5">
             <div className="bg-violet-50 border border-violet-200 rounded-2xl p-5 flex gap-4 items-center">
@@ -116,7 +119,6 @@ export function EventosScreen() {
           </div>
         )}
 
-        {/* Paso 2: Gustos */}
         {paso === 'gustos' && (
           <div className="flex flex-col gap-5 items-center">
             <div className="bg-violet-50 border border-violet-200 rounded-2xl p-5 w-full text-center">
@@ -124,22 +126,30 @@ export function EventosScreen() {
                 Cuando esté listo, puede hablar con su amigo
               </p>
               <p className="text-base text-gray-700">
-                Imagine que al tocar el micrófono le cuenta qué le gusta hacer. 
-                Su amigo usará eso para buscar personas con gustos parecidos.
+                Toque el micrófono para comenzar la conversación.
               </p>
             </div>
 
-            {/* Botón circular de micrófono */}
             <button
               type="button"
-              className="h-28 w-28 rounded-full bg-violet-600 hover:bg-violet-700 flex items-center justify-center text-white shadow-xl active:scale-95 transition-all"
+              onClick={() => setMicrofonoActivado(true)}
+              className={`h-28 w-28 rounded-full flex items-center justify-center text-white shadow-xl active:scale-95 transition-all ${
+                microfonoActivado
+                  ? 'bg-violet-600 hover:bg-violet-700'
+                  : 'bg-gray-400 hover:bg-gray-500'
+              }`}
             >
               <Mic className="h-12 w-12" />
             </button>
 
             <button
               onClick={verPersonas}
-              className="w-full bg-violet-600 hover:bg-violet-700 text-white rounded-2xl py-4 flex items-center justify-center gap-3 text-xl font-bold active:scale-95 transition-all shadow-lg"
+              disabled={!microfonoActivado}
+              className={`w-full rounded-2xl py-4 flex items-center justify-center gap-3 text-xl font-bold transition-all shadow-lg ${
+                microfonoActivado
+                  ? 'bg-violet-600 hover:bg-violet-700 text-white active:scale-95'
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+              }`}
             >
               <Users className="h-7 w-7" />
               Ver personas con gustos parecidos
@@ -147,7 +157,6 @@ export function EventosScreen() {
           </div>
         )}
 
-        {/* Paso 3: Personas sugeridas */}
         {paso === 'personas' && (
           <div className="flex flex-col gap-5">
             <div className="bg-violet-50 border border-violet-200 rounded-2xl p-5 flex gap-4 items-start">
@@ -198,7 +207,6 @@ export function EventosScreen() {
           </div>
         )}
 
-        {/* Paso 4: Planes sugeridos */}
         {paso === 'planes' && (
           <div className="flex flex-col gap-5">
             <div className="bg-violet-50 border border-violet-200 rounded-2xl p-5 flex gap-4 items-start">
