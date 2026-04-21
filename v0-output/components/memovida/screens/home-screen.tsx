@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { useMemoVida, type Screen } from '@/lib/memovida-context'
-import { Headphones, Users, Calendar, Brain, CalendarDays } from 'lucide-react'
+import { Headphones, Users, Calendar, Brain, Mic } from 'lucide-react'
+// 👆 Cambié CalendarDays por Mic y lo borré del import
 
 interface MenuItem {
   id: Screen
@@ -63,7 +64,7 @@ export function HomeScreen() {
         <p className="text-xl opacity-90 mt-1">Bienvenida a MemoVida</p>
       </header>
 
-      {/* Grid de opciones 2x2 + botón Eventos */}
+      {/* Grid de opciones 2x2 + botón El amigo de Todos */}
       <main className="flex-1 p-6 flex flex-col gap-5">
         <div className="grid grid-cols-2 gap-5">
           {menuItems.map((item) => (
@@ -79,15 +80,17 @@ export function HomeScreen() {
           ))}
         </div>
 
-        {/* Botón Eventos — ancho completo */}
+        {/* Botón El amigo de Todos — ancho completo */}
         <button
-          onClick={() => navigateTo('eventos')}
+          onClick={() => navigateTo('eventos')} // puedes renombrar luego la screen si quieres
           className="w-full bg-violet-600 hover:bg-violet-700 text-white rounded-3xl px-8 py-6 flex items-center gap-6 transition-all duration-200 active:scale-95 shadow-lg"
         >
-          <CalendarDays className="h-14 w-14 flex-shrink-0" />
+          <Mic className="h-14 w-14 flex-shrink-0" />
           <div className="text-left">
-            <p className="text-2xl font-bold">Eventos</p>
-            <p className="text-base opacity-90">Actividades con amigos</p>
+            <p className="text-2xl font-bold">El amigo de Todos</p>
+            <p className="text-base opacity-90">
+              Habla y encuentra compañía
+            </p>
           </div>
         </button>
       </main>
