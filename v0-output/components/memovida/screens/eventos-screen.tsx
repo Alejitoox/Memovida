@@ -46,7 +46,6 @@ const planesSugeridos: SugerenciaPlan[] = [
 export function EventosScreen() {
   const { goBack } = useMemoVida()
   const [paso, setPaso] = useState<Paso>('inicio')
-  const [gustoPrincipal, setGustoPrincipal] = useState<string>('')
 
   const avanzarAGustos = () => setPaso('gustos')
   const verPersonas = () => setPaso('personas')
@@ -119,29 +118,24 @@ export function EventosScreen() {
 
         {/* Paso 2: Gustos */}
         {paso === 'gustos' && (
-          <div className="flex flex-col gap-5">
-            <div className="bg-violet-50 border border-violet-200 rounded-2xl p-5">
+          <div className="flex flex-col gap-5 items-center">
+            <div className="bg-violet-50 border border-violet-200 rounded-2xl p-5 w-full text-center">
               <p className="text-lg font-bold text-gray-800 mb-2">
-                Cuéntele a su amigo qué le gusta hacer
+                Cuando esté listo, puede hablar con su amigo
               </p>
               <p className="text-base text-gray-700">
-                Puede escribirlo con ayuda de alguien o simplemente usar esto como guía
-                para la conversación. Por ejemplo: <strong>“Me gusta jugar billar y tomar café”.</strong>
+                Imagine que al tocar el micrófono le cuenta qué le gusta hacer. 
+                Su amigo usará eso para buscar personas con gustos parecidos.
               </p>
             </div>
 
-            <div>
-              <label className="text-lg font-bold text-gray-700 block mb-2">
-                ¿Qué le gusta hacer?
-              </label>
-              <textarea
-                value={gustoPrincipal}
-                onChange={(e) => setGustoPrincipal(e.target.value)}
-                placeholder="Ej: Jugar billar, caminar en el parque, tomar café y conversar..."
-                rows={3}
-                className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-xl focus:border-violet-400 focus:outline-none transition-colors resize-none"
-              />
-            </div>
+            {/* Botón circular de micrófono */}
+            <button
+              type="button"
+              className="h-28 w-28 rounded-full bg-violet-600 hover:bg-violet-700 flex items-center justify-center text-white shadow-xl active:scale-95 transition-all"
+            >
+              <Mic className="h-12 w-12" />
+            </button>
 
             <button
               onClick={verPersonas}
