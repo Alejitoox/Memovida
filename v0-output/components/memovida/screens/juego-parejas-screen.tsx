@@ -39,7 +39,7 @@ function createCards(): Card[] {
   }))
 }
 
-export function JuegoParejas() {
+export function JuegoParejasScreen() {
   const { navigateTo } = useMemoVida()
   const [cards, setCards] = useState<Card[]>(createCards)
   const [flippedCards, setFlippedCards] = useState<number[]>([])
