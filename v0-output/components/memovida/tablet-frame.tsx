@@ -2,7 +2,7 @@
 
 import { type ReactNode } from 'react'
 import { useMemoVida } from '@/lib/memovida-context'
-import { Mic, Settings, ChevronLeft, Home } from 'lucide-react'
+import { Settings, ChevronLeft, Home } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 interface TabletFrameProps {
@@ -22,7 +22,7 @@ export function TabletFrame({
   showSettingsButton = true,
   headerColor = 'bg-primary'
 }: TabletFrameProps) {
-  const { goBack, navigateTo, setIsVoiceAssistantOpen } = useMemoVida()
+  const { goBack, navigateTo } = useMemoVida()
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -72,15 +72,6 @@ export function TabletFrame({
       <main className="flex-1 overflow-auto">
         {children}
       </main>
-
-      {/* Voice Assistant Button - Fixed */}
-      <Button
-        onClick={() => setIsVoiceAssistantOpen(true)}
-        className="fixed bottom-6 right-6 h-16 w-16 rounded-full bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg z-50"
-        size="icon"
-      >
-        <Mic className="h-8 w-8" />
-      </Button>
     </div>
   )
 }
